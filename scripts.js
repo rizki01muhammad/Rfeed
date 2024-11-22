@@ -8,8 +8,8 @@ client.connect({
 // Fungsi yang dijalankan saat koneksi berhasil
 function onConnect() {
     console.log("Connected to MQTT broker at test.mosquitto.org");
-    // Subscribe ke semua topik di dalam "Rizky/TA/fishFarm/#"
-    client.subscribe("Rizky/TA/fishFarm/#");
+    // Subscribe ke semua topik di dalam "Rizki/TA/fishFarm/#"
+    client.subscribe("Rizki/TA/fishFarm/#");
 }
 
 // Fungsi yang dijalankan saat koneksi gagal
@@ -31,27 +31,27 @@ function onMessageArrived(message) {
 
     // Update elemen UI berdasarkan topik yang diterima
     switch (message.destinationName) {
-        case "Rizky/TA/fishFarm/feedSchedule":
+        case "Rizki/TA/fishFarm/feedSchedule":
             document.getElementById("feed-schedule").innerText = `${payload} gram`;
             break;
-        case "Rizky/TA/fishFarm/feedDistribution":
+        case "Rizki/TA/fishFarm/feedDistribution":
             document.getElementById("feed-amount").innerText = `${payload} gram`;
             break;
-        case "Rizky/TA/fishFarm/dispenserMonitor":
+        case "Rizki/TA/fishFarm/dispenserMonitor":
             updateFeedCapacityChart(parseFloat(payload));
             break;
-        case "Rizky/TA/fishFarm/alerts":
+        case "Rizki/TA/fishFarm/alerts":
             document.getElementById("alerts").innerText = payload;
             const alertStatus = payload.toLowerCase() === "sehat" ? "badge-success" : "badge-danger";
             document.getElementById("system-status").className = `badge ${alertStatus}`;
             break;
-        case "Rizky/TA/fishFarm/fishWeight":
+        case "Rizki/TA/fishFarm/fishWeight":
             updateFishWeightDisplay(parseFloat(payload));
             break;
-        case "Rizky/TA/fishFarm/deviceStatus":
+        case "Rizki/TA/fishFarm/deviceStatus":
             document.getElementById("device-status").innerText = payload;
             break;
-        case "Rizky/TA/fishFarm/harvestPrediction":
+        case "Rizki/TA/fishFarm/harvestPrediction":
             document.getElementById("harvest-prediction").innerText = payload;
             break;
         default:
